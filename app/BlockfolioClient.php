@@ -1,9 +1,8 @@
 <?php
+
 namespace Blockfolio;
 
-use Blockfolio\Exception\UnsuccessfulResponse;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -18,9 +17,9 @@ class BlockfolioClient extends Client {
 	private const DEFAULT_USER_AGENT = 'okhttp/3.6.0';
 
 	private const DEFAULT_HEADERS = [
-		'User-Agent'  => self::DEFAULT_USER_AGENT,
+		'User-Agent'   => self::DEFAULT_USER_AGENT,
 		'build-number' => self::BUILD_NUMBER,
-		'version' => self::BUILD_VERSION
+		'version'      => self::BUILD_VERSION
 	];
 
 	/**
@@ -33,7 +32,7 @@ class BlockfolioClient extends Client {
 
 		// add our default headers
 		$stack->push(Middleware::mapRequest(function (RequestInterface $request) {
-			foreach(self::DEFAULT_HEADERS as $header => $val) {
+			foreach (self::DEFAULT_HEADERS as $header => $val) {
 				$request = $request->withHeader($header, $val);
 			}
 			return $request;
@@ -49,7 +48,7 @@ class BlockfolioClient extends Client {
 
 		parent::__construct(array_merge($options, [
 			'base_uri' => self::BASE_URI,
-			'handler' => $stack
+			'handler'  => $stack
 		]));
 
 	}
