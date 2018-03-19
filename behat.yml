@@ -1,0 +1,7 @@
+default:
+
+  suites:
+    default:
+      paths: [ %paths.base%/features ]
+      contexts:
+        - Blockfolio\Test\ApiContext

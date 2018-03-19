@@ -1,0 +1,53 @@
+{
+    "name": "loonpwn/blockfolio-php",
+    "description": "Blockfolio SDK for PHP - Use Blockfolios API in your PHP project",
+    "keywords": ["blockfolio","cryptocurrency","portfolio"],
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Harlan Wilton",
+            "email": "harlan@harlan.com"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": "^7.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blockfolio\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Blockfolio\\Test\\": "tests"
+        }
+    },
+    "require-dev": {
+        "behat/behat": "^3.4",
+        "brainmaestro/composer-git-hooks": "^2.4"
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": "composer lint",
+            "commit-msg": "export NAME=$(git branch --no-color | grep '*' | sed 's/* //'); echo \"$NAME\"': '$(cat \"$1\") > \"$1\"",
+            "pre-push": "composer test"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/cghooks add --ignore-lock",
+        "post-update-cmd": "vendor/bin/cghooks update",
+        "lint": [
+            "./vendor/bin/phpcbf -n",
+            "./vendor/bin/phpcs --warning-severity=6"
+        ],
+        "test": "./vendor/bin/behat"
+    }
+}
