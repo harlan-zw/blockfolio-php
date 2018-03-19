@@ -10,6 +10,7 @@ services:
           - ${APPLICATION}:/var/www
           - ~/.config/composer:/home/laradock/.config/composer
           - ~/.gitconfig:/home/laradock/.gitconfig
+          - ~/.ssh:/home/laradock/.ssh
 
 ### Workspace Utilities Container ###########################
 

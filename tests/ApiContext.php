@@ -3,14 +3,13 @@ namespace Blockfolio\Test;
 
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Blockfolio\API;
 
 class ApiContext implements Context {
 
 
 
-	public $sdk = false;
+	public $api = false;
 	public $lastResponse = false;
 
 	/**
@@ -19,14 +18,14 @@ class ApiContext implements Context {
 	 * @param bool $sdk
 	 */
 	public function __construct() {
-		$this->sdk = new API();
+		$this->api = new API();
 	}
 
 	/**
 	 * @When /^I call the API "([^"]*)" endpoint$/
 	 */
 	public function iCallTheAPIEndpoint($endpoint) {
-		$this->lastResponse = $this->sdk->$endpoint();
+		$this->lastResponse = $this->api->$endpoint();
 	}
 
 	/**
@@ -49,20 +48,20 @@ class ApiContext implements Context {
 	 * @When /^I call the "([^"]*)" endpoint with ticker "([^"]*)"$/
 	 */
 	public function iCallTheEndpointWithTicker($function, $ticker) {
-		$this->lastResponse = $this->sdk->$function($ticker);
+		$this->lastResponse = $this->api->$function($ticker);
 	}
 
 	/**
 	 * @When /^I call the "([^"]*)" endpoint with exchange "([^"]*)" and ticker "([^"]*)"$/
 	 */
 	public function iCallTheEndpointWithExchangeAndTicker($function, $exchange, $ticker) {
-		$this->lastResponse = $this->sdk->$function($exchange, $ticker);
+		$this->lastResponse = $this->api->$function($exchange, $ticker);
 	}
 
 	/**
 	 * @When /^I call the "([^"]*)" endpoint with exchange "([^"]*)", ticker "([^"]*)" and duration "([^"]*)"$/
 	 */
 	public function iCallTheEndpointWithExchangeTickerAndDuration($function, $exchange, $ticker, $duration) {
-		$this->lastResponse = $this->sdk->$function($exchange, $ticker, $duration);
+		$this->lastResponse = $this->api->$function($exchange, $ticker, $duration);
 	}
 }
