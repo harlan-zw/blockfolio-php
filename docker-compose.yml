@@ -56,9 +56,11 @@ services:
           - YARN_VERSION=${WORKSPACE_YARN_VERSION}
           - TZ=${WORKSPACE_TIMEZONE}
           - BLOCKFOLIO_API_KEY=${BLOCKFOLIO_API_KEY}
+          - BLOCKFOLIO_MAGIC=${BLOCKFOLIO_MAGIC}
         dockerfile: "Dockerfile-${PHP_VERSION}"
       environment:
          - BLOCKFOLIO_API_KEY=${BLOCKFOLIO_API_KEY}
+         - BLOCKFOLIO_MAGIC=${BLOCKFOLIO_MAGIC}
       volumes_from:
         - applications
       extra_hosts:

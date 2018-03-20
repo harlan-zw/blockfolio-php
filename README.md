@@ -3,8 +3,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/loonpwn/blockfolio-php.svg?style=flat)](https://packagist.org/packages/loonpwn/php-blockfolio)
 [![Apache 2 License](https://img.shields.io/packagist/l/loonpwn/blockfolio-php.svg?style=flat)](http://aws.amazon.com/apache-2-0/)
 
-## THIS IS NOT WORKING - Blockfolio has blocked public API access
-
+## THIS IS NO LONGER WORKING FOR PUBLIC ACCESS DUE TO BLOCKFOLIO BLOCKING IT.
+    HOWEVER YOU MAY USE IT FOR YOUR OWN ACCOUNT BY JUMPING THROUGH SOME HOOPS
 
 The **Blockfolio SDK for PHP** is an interface for interacting with the Blockfolio endpoints.
 
@@ -18,11 +18,24 @@ The **Blockfolio SDK for PHP** is an interface for interacting with the Blockfol
 
 ## Getting Started
 
+0. **Find Your Magic** - You will need to use Packet Capture Android App and scan Blockfolio outgoing requests. The
+request looks like this
+
+```
+GET /rest/system_status?platform=android_rn HTTP/1.1
+magic: edtopjhgn2345piuty89whqejfiobh89-2q453
+build-number: 225
+version: 1.1.10.225
+Host: api-v0.blockfolio.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+User-Agent: okhttp/3.6.0
+```
+
 1. **Get your API Key** – This can be found within the app under Settings -> Token
-1. **Minimum requirements** – To run the SDK, your system will need to meet the
-   minimum requirements, including having **PHP >= 7.1**.
-1. **Install the SDK** – Using Composer run `composer require loonpwn/blockfolio-php`
-1. **Using the SDK** – Follow the examples below or look at the functions available
+2. **Minimum requirements** – To run the SDK, your system will need to meet the minimum requirements, including having **PHP >= 7.1**.
+3. **Install the SDK** – Using Composer run `composer require loonpwn/blockfolio-php`
+4. **Using the SDK** – Follow the examples below or look at the functions available
 
 ## Endpoints
 
@@ -47,6 +60,7 @@ The ideal setup is to create an environment variable. Alternatively you can pass
 
 ```
 BLOCKFOLIO_API_KEY=<key>
+BLOCKFOLIO_MAGIC=<magic>
 ```
 
 
@@ -59,6 +73,7 @@ use Blockfolio\API;
 
 // Instantiate a blockfolio api instance
 $api = new API([
+    'BLOCKFOLIO_MAGIC' => '<magic',  // if not declared as an environment variabl
     'BLOCKFOLIO_API_KEY' => '<key>', // if not declared as an environment variable
     'fiat_currency' => 'USD', // optional
     'locale' => 'en-US', // optional

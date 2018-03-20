@@ -11,14 +11,16 @@ class API {
 	 * Environment and option value name for the key we need to pass in
 	 */
 	public const API_KEY_NAME = 'BLOCKFOLIO_API_KEY';
+	public const API_MAGIC_KEY_NAME = 'BLOCKFOLIO_MAGIC';
 
 	/**
 	 * Default options sent to endpoints
 	 */
 	private const DEFAULTS_OPTIONS = [
-		'fiat_currency' => 'USD',
+		'fiat_currency' => 'AUD',
 		'locale'        => 'en-US',
-		'use_alias'     => true,
+		'debug'         => false, // turn to true if you want curl output
+		'use_alias'     => 'true',
 	];
 
 	private $client;
@@ -41,6 +43,11 @@ class API {
 		// try and pull the api key from env if it has not been provided
 		if (! isset($options[ self::API_KEY_NAME ])) {
 			$options[ self::API_KEY_NAME ] = getenv(self::API_KEY_NAME);
+		}
+
+		// try and pull the api key from env if it has not been provided
+		if (! isset($options[ self::API_MAGIC_KEY_NAME ])) {
+			$options[ self::API_MAGIC_KEY_NAME ] = getenv(self::API_MAGIC_KEY_NAME);
 		}
 
 		$this->key     = $options[ self::API_KEY_NAME ];
@@ -98,9 +105,9 @@ class API {
 	 */
 	public function get_positions_v2(string $ticker) {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get($this->appendKey(__FUNCTION__) . '/' . $ticker, $options);
 	}
@@ -122,9 +129,9 @@ class API {
 	 */
 	public function get_combined_position(string $ticker) {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get($this->appendKey(__FUNCTION__) . '/' . $ticker, $options);
 	}
@@ -139,9 +146,9 @@ class API {
 	 */
 	public function marketdetails_v2(string $exchange, string $ticker) {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get($this->appendKey(__FUNCTION__) . '/' . $exchange . '/' . $ticker, $options);
 	}
@@ -153,9 +160,9 @@ class API {
 	 */
 	public function get_all_positions() {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get($this->appendKey(__FUNCTION__), $options);
 	}
@@ -171,9 +178,9 @@ class API {
 	 */
 	public function candlestick(string $exchange, string $ticker, string $duration) {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get($this->appendKey(__FUNCTION__) . '/' . $exchange . '/' . $ticker . '/' . $duration, $options);
 	}
@@ -188,9 +195,9 @@ class API {
 	 */
 	public function orderbook(string $exchange, string $ticker) {
 		$options = [
-			$this->options['fiat_currency'],
-			$this->options['locale'],
-			$this->options['use_alias']
+			'fiat_currency' => $this->options['fiat_currency'],
+			'locale' => $this->options['locale'],
+			'use_alias' => $this->options['use_alias']
 		];
 		return $this->get(__FUNCTION__ . '/' . $exchange . '/' . $ticker, $options);
 	}
