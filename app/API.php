@@ -55,7 +55,7 @@ class API {
 			throw new MissingMagicException('You must provide your magic for blockfolio to work.');
 		}
 
-		$this->options['magic'] = $options[self::API_MAGIC_KEY_NAME];
+		$options['magic'] = $options[self::API_MAGIC_KEY_NAME];
 		$this->key     = $options[ self::API_KEY_NAME ];
 		$this->options = $options;
 		$this->client  = new BlockfolioClient($options);
