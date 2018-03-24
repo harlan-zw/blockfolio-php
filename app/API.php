@@ -3,6 +3,7 @@
 namespace Blockfolio;
 
 use Blockfolio\Exception\MissingAPIKeyException;
+use Blockfolio\Exception\MissingMagicException;
 use Blockfolio\Exception\UnsuccessfulResponse;
 
 class API {
@@ -50,6 +51,11 @@ class API {
 			$options[ self::API_MAGIC_KEY_NAME ] = getenv(self::API_MAGIC_KEY_NAME);
 		}
 
+		if (empty($options[self::API_MAGIC_KEY_NAME])) {
+			throw new MissingMagicException('You must provide your magic for blockfolio to work.');
+		}
+
+		$this->options['magic'] = $options[self::API_MAGIC_KEY_NAME];
 		$this->key     = $options[ self::API_KEY_NAME ];
 		$this->options = $options;
 		$this->client  = new BlockfolioClient($options);

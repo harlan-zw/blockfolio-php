@@ -30,10 +30,6 @@ class BlockfolioClient extends Client {
 	 */
 	public function __construct(array $options = []) {
 
-		if (empty($options['BLOCKFOLIO_MAGIC'])) {
-			throw new MissingMagicException('You must provide your magic for blockfolio to work.');
-		}
-
 		$stack = new HandlerStack();
 		$stack->setHandler(new CurlHandler());
 
@@ -42,7 +38,7 @@ class BlockfolioClient extends Client {
 			foreach (self::DEFAULT_HEADERS as $header => $val) {
 				$request = $request->withHeader($header, $val);
 			}
-			$request = $request->withHeader('magic', $options['BLOCKFOLIO_MAGIC']);
+			$request = $request->withHeader('magic', $options['magic']);
 			return $request;
 		}), 'add_default_headers');
 
